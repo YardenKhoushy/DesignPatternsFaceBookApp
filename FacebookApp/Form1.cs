@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using Facebook;
 using FacebookWrapper;
+using FacebookWrapper.ObjectModel;
 
 namespace FacebookApp
 {
@@ -19,11 +20,12 @@ namespace FacebookApp
             FacebookWrapper.FacebookService.s_CollectionLimit = 200;
             FacebookWrapper.FacebookService.s_FbApiVersion = 2.8f;
         }
-        FacebookWrapper.ObjectModel.User m_LoggedInUser;
+        User m_LoggedInUser;
 
         private void loginAndInit()
         {
-            LoginResult result = FacebookService.Login("805313746467364", "public_profile");
+            //LoginResult result = FacebookService.Login("805313746467364", "public_profile", "user_friends");
+            LoginResult result = FacebookService.Login("1450160541956417", "public_profile", "user_friends");
             if (!string.IsNullOrEmpty(result.AccessToken))
             {
                 m_LoggedInUser = result.LoggedInUser;
@@ -35,6 +37,7 @@ namespace FacebookApp
                 MessageBox.Show(result.ErrorMessage);
             }
         }
+
         private void buttonLogin_Click(object sender, EventArgs e)
         {
             loginAndInit();
@@ -43,6 +46,29 @@ namespace FacebookApp
         private void buttonLogout_Click(object sender, EventArgs e)
         {
             FacebookService.Logout(null);
+            this.profilePic.Visible = false;
+        }
+
+        private void fecthFriends_Click(object sender, EventArgs e)
+        {
+            fetchFriends();
+        }
+        private void fetchFriends()
+        {
+            friendsList.Items.Clear();
+            friendsList.DisplayMember = "Name";
+            foreach (User friend in m_LoggedInUser.Friends)
+            {
+                friendsList.Items.Add(friend);
+                friend.ReFetch(DynamicWrapper.eLoadOptions.Full);
+            }
+
+            if (m_LoggedInUser.Friends.Count == 0)
+            {
+                MessageBox.Show("No Friends to retrieve :(");
+            }
         }
     }
+
+    
 }
