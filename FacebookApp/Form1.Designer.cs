@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.buttonLogin = new System.Windows.Forms.Button();
             this.profilePic = new System.Windows.Forms.PictureBox();
             this.buttonLogout = new System.Windows.Forms.Button();
@@ -39,12 +40,15 @@
             // 
             // buttonLogin
             // 
+            this.buttonLogin.BackColor = System.Drawing.SystemColors.Highlight;
+            this.buttonLogin.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.875F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonLogin.ForeColor = System.Drawing.SystemColors.Control;
             this.buttonLogin.Location = new System.Drawing.Point(12, 21);
             this.buttonLogin.Name = "buttonLogin";
-            this.buttonLogin.Size = new System.Drawing.Size(132, 55);
+            this.buttonLogin.Size = new System.Drawing.Size(212, 96);
             this.buttonLogin.TabIndex = 0;
-            this.buttonLogin.Text = "Login";
-            this.buttonLogin.UseVisualStyleBackColor = true;
+            this.buttonLogin.Text = "Log In";
+            this.buttonLogin.UseVisualStyleBackColor = false;
             this.buttonLogin.Click += new System.EventHandler(this.buttonLogin_Click);
             // 
             // profilePic
@@ -54,6 +58,7 @@
             this.profilePic.Size = new System.Drawing.Size(361, 229);
             this.profilePic.TabIndex = 1;
             this.profilePic.TabStop = false;
+            this.profilePic.Visible = false;
             // 
             // buttonLogout
             // 
@@ -71,7 +76,7 @@
             this.fetchFriends.Name = "fetchFriends";
             this.fetchFriends.Size = new System.Drawing.Size(188, 37);
             this.fetchFriends.TabIndex = 3;
-            this.fetchFriends.Text = "fetchFriends";
+            this.fetchFriends.Text = "Fetch Friends";
             this.fetchFriends.UseVisualStyleBackColor = true;
             this.fetchFriends.Visible = false;
             this.fetchFriends.Click += new System.EventHandler(this.fetchFriends_Click);
@@ -88,13 +93,13 @@
             // 
             // buttonBirthdaySort
             // 
+            this.buttonBirthdaySort.Enabled = false;
             this.buttonBirthdaySort.Location = new System.Drawing.Point(808, 294);
             this.buttonBirthdaySort.Name = "buttonBirthdaySort";
             this.buttonBirthdaySort.Size = new System.Drawing.Size(314, 45);
             this.buttonBirthdaySort.TabIndex = 5;
             this.buttonBirthdaySort.Text = "Sort By Birthday";
             this.buttonBirthdaySort.UseVisualStyleBackColor = true;
-            this.buttonBirthdaySort.Enabled = false;
             this.buttonBirthdaySort.Visible = false;
             this.buttonBirthdaySort.Click += new System.EventHandler(this.buttonBirthdaySort_Click);
             // 
@@ -102,6 +107,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackgroundImage = global::FacebookApp.Properties.Resources.facebookBackground;
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1412, 686);
             this.Controls.Add(this.buttonBirthdaySort);
             this.Controls.Add(this.friendsList);
@@ -109,8 +116,9 @@
             this.Controls.Add(this.buttonLogout);
             this.Controls.Add(this.profilePic);
             this.Controls.Add(this.buttonLogin);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "Facebook Application";
             ((System.ComponentModel.ISupportInitialize)(this.profilePic)).EndInit();
             this.ResumeLayout(false);
 

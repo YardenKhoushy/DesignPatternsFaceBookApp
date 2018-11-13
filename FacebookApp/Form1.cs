@@ -32,7 +32,6 @@ namespace FacebookApp
                 m_LoggedInUser = result.LoggedInUser;
                 profilePic.LoadAsync(m_LoggedInUser.PictureNormalURL);
                 controlsVisibility(true);
-                //fetchUserInfo();
             }
             else
             {
@@ -90,20 +89,16 @@ namespace FacebookApp
         {
             m_FriendsList.sortFriendsByDate();
             GetFriendsListAfterSort();
-            //test
         }
 
         private void GetFriendsListAfterSort()
         {
             friendsList.Items.Clear();
             friendsList.DisplayMember = "Name";
-
             foreach (UserNode user in m_FriendsList.UserList)
             {
                 friendsList.Items.Add(user.Name);
             }
         }
     }
-
-    
 }
