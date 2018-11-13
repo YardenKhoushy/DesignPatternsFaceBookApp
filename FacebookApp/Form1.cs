@@ -90,6 +90,7 @@ namespace FacebookApp
         {
             m_FriendsList.sortFriendsByDate();
             GetFriendsListAfterSort();
+            //test
         }
 
         private void GetFriendsListAfterSort()
