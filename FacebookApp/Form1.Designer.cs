@@ -107,6 +107,7 @@
         private System.Windows.Forms.Button buttonLogout;
         private System.Windows.Forms.Button fecthFriends;
         private System.Windows.Forms.ListBox friendsList;
+        //This is a test.
     }
 }
 
