@@ -1,0 +1,12 @@
+C:\Users\Itay\Documents\DesignPatterns\DesignPatternsFaceBookApp\FacebookApp\bin\Release\FacebookApp.exe
+C:\Users\Itay\Documents\DesignPatterns\DesignPatternsFaceBookApp\FacebookApp\bin\Release\FacebookApp.pdb
+C:\Users\Itay\Documents\DesignPatterns\DesignPatternsFaceBookApp\FacebookApp\bin\Release\Facebook.dll
+C:\Users\Itay\Documents\DesignPatterns\DesignPatternsFaceBookApp\FacebookApp\bin\Release\FbGraphApiWrapper.dll
+C:\Users\Itay\Documents\DesignPatterns\DesignPatternsFaceBookApp\FacebookApp\obj\Release\FacebookApp.csprojAssemblyReference.cache
+C:\Users\Itay\Documents\DesignPatterns\DesignPatternsFaceBookApp\FacebookApp\obj\Release\FacebookApp.Form1.resources
+C:\Users\Itay\Documents\DesignPatterns\DesignPatternsFaceBookApp\FacebookApp\obj\Release\FacebookApp.Properties.Resources.resources
+C:\Users\Itay\Documents\DesignPatterns\DesignPatternsFaceBookApp\FacebookApp\obj\Release\FacebookApp.csproj.GenerateResource.cache
+C:\Users\Itay\Documents\DesignPatterns\DesignPatternsFaceBookApp\FacebookApp\obj\Release\FacebookApp.csproj.CoreCompileInputs.cache
+C:\Users\Itay\Documents\DesignPatterns\DesignPatternsFaceBookApp\FacebookApp\obj\Release\FacebookApp.csproj.CopyComplete
+C:\Users\Itay\Documents\DesignPatterns\DesignPatternsFaceBookApp\FacebookApp\obj\Release\FacebookApp.exe
+C:\Users\Itay\Documents\DesignPatterns\DesignPatternsFaceBookApp\FacebookApp\obj\Release\FacebookApp.pdb
