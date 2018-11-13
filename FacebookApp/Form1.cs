@@ -88,13 +88,6 @@ namespace FacebookApp
 
         private void buttonBirthdaySort_Click(object sender, EventArgs e)
         {
-            int a = 5;
-            foreach (UserNode user in m_FriendsList.UserList)
-            {
-                DateTime thisDate1 = new DateTime(2011, a, 10);
-                user.Birthday = thisDate1;
-                a -= 1;
-            }
             m_FriendsList.sortFriendsByDate();
             GetFriendsListAfterSort();
         }
