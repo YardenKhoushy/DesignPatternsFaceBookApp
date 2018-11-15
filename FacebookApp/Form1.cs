@@ -26,11 +26,11 @@ namespace FacebookApp
         private void loginAndInit()
         {
             //LoginResult result = FacebookService.Login("805313746467364", "public_profile", "user_friends");
-            LoginResult result = FacebookService.Login("1450160541956417", "public_profile", "user_friends", "user_birthday");
+            LoginResult result = FacebookService.Login("1450160541956417", "public_profile", "user_friends", "user_birthday", "user_photos");
             if (!string.IsNullOrEmpty(result.AccessToken))
             {
                 m_LoggedInUser = result.LoggedInUser;
-                profilePic.LoadAsync(m_LoggedInUser.PictureNormalURL);
+                profilePic.LoadAsync(m_LoggedInUser.PictureLargeURL);
                 controlsVisibility(true);
             }
             else
@@ -48,7 +48,7 @@ namespace FacebookApp
         {
             FacebookService.Logout(null);
             controlsVisibility(false);
-            friendsList.Items.Clear();
+            listBoxFriendsList.Items.Clear();
         }
 
         private void fetchFriends_Click(object sender, EventArgs e)
@@ -58,14 +58,12 @@ namespace FacebookApp
         }
         private void getFriends()
         {
-            friendsList.Items.Clear();
-            friendsList.DisplayMember = "Name";
+            listBoxFriendsList.Items.Clear();
+            listBoxFriendsList.DisplayMember = "Name";
             m_FriendsList = new FacebookUtils();
             foreach (User friend in m_LoggedInUser.Friends)
             {
-                //string birthday = friend.Birthday;
-                //string email = friend.Email;
-                friendsList.Items.Add(friend);
+                listBoxFriendsList.Items.Add(friend);
                 friend.ReFetch(DynamicWrapper.eLoadOptions.Full);
                 UserNode user = new UserNode(friend);
                 m_FriendsList.AddFriend(user);
@@ -79,10 +77,15 @@ namespace FacebookApp
         }
         private void controlsVisibility(bool visibilty)
         {
-            friendsList.Visible = visibilty;
+            listBoxFriendsList.Visible = visibilty;
             profilePic.Visible = visibilty;
-            fetchFriends.Visible = visibilty;
+            buttonFetchFriends.Visible = visibilty;
             buttonBirthdaySort.Visible = visibilty;
+            listBoxFetchPosts.Visible = visibilty;
+            buttonFetchPosts.Visible = visibilty;
+            buttonLogout.Enabled = visibilty;
+            labelGetPhoto.Visible = visibilty;
+            buttonGetMostLikedPhoto.Visible = visibilty; 
         }
 
         private void buttonBirthdaySort_Click(object sender, EventArgs e)
@@ -93,12 +96,78 @@ namespace FacebookApp
 
         private void GetFriendsListAfterSort()
         {
-            friendsList.Items.Clear();
-            friendsList.DisplayMember = "Name";
+            listBoxFriendsList.Items.Clear();
+            listBoxFriendsList.DisplayMember = "Name";
             foreach (UserNode user in m_FriendsList.UserList)
             {
-                friendsList.Items.Add(user.Name);
+                listBoxFriendsList.Items.Add(user.Name);
             }
+        }
+
+        private void buttonFetchPosts_Click(object sender, EventArgs e)
+        {
+            getPosts();
+        }
+
+        private void getPosts()
+        {
+            foreach (Post post in m_LoggedInUser.Posts)
+            {
+                if (post.Message != null)
+                {
+                    listBoxFetchPosts.Items.Add(post.Message);
+                }
+                else if (post.Caption != null)
+                {
+                    listBoxFetchPosts.Items.Add(post.Caption);
+                }
+                else
+                {
+                    listBoxFetchPosts.Items.Add(string.Format("[{0}]", post.Type));
+                }
+            }
+
+            if (m_LoggedInUser.Posts.Count == 0)
+            {
+                MessageBox.Show("No Posts to retrieve");
+            }
+        }
+
+        private void buttonGetMostLikedPhoto_Click(object sender, EventArgs e)
+        {
+            if (listBoxFriendsList.SelectedItem != null)
+            {
+                User selectedUser = (User)listBoxFriendsList.Items[listBoxFriendsList.SelectedIndex];
+                string photoURL= getMostLikedPhoto(selectedUser);
+                pictureBoxMostLikedPhoto.Visible = true;
+                labelPhotoLikes.Visible = true;
+                pictureBoxMostLikedPhoto.LoadAsync(photoURL);
+            }
+            else
+            {
+                MessageBox.Show("Please choose a friend from your friends list");
+            }    
+            
+        }
+
+        private string getMostLikedPhoto(User i_SelectedUser)
+        {
+            int maxLikes = 0;
+            string photoURL = "";
+            foreach(Album album in i_SelectedUser.Albums)
+            {
+                foreach(Photo photo in album.Photos)
+                {
+                    int temp = photo.LikedBy.Count;
+                    if(temp > maxLikes)
+                    {
+                        maxLikes = temp;
+                        photoURL = photo.PictureNormalURL;
+                    }
+                }
+            }
+            labelPhotoLikes.Text = String.Format("Number of Likes: {0}", maxLikes);
+            return photoURL;
         }
     }
 }
