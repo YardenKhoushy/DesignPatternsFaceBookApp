@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
@@ -20,23 +21,61 @@ namespace FacebookApp
             FacebookWrapper.FacebookService.s_CollectionLimit = 200;
             FacebookWrapper.FacebookService.s_FbApiVersion = 2.8f;
         }
-        User m_LoggedInUser;
-        FacebookUtils m_FriendsList;
+        public User m_LoggedInUser;
+        public FacebookUtils m_FriendsList;
+        public AppSettings m_AppSettings;
+        public LoginResult m_Result;
+
 
         private void loginAndInit()
         {
             //LoginResult result = FacebookService.Login("805313746467364", "public_profile", "user_friends");
-            LoginResult result = FacebookService.Login("1450160541956417", "public_profile", "user_friends", "user_birthday", "user_photos");
-            if (!string.IsNullOrEmpty(result.AccessToken))
+            if (!m_AppSettings.RememberUser)
             {
-                m_LoggedInUser = result.LoggedInUser;
+                m_Result = FacebookService.Login("1450160541956417", "public_profile", "user_friends", "user_birthday", "user_photos");
+            }
+            else
+            {
+                m_Result = FacebookService.Connect(m_AppSettings.LastAccessToken);
+            }
+            if (!string.IsNullOrEmpty(m_Result.AccessToken))
+            {
+                m_LoggedInUser = m_Result.LoggedInUser;
                 profilePic.LoadAsync(m_LoggedInUser.PictureLargeURL);
                 controlsVisibility(true);
             }
             else
             {
-                MessageBox.Show(result.ErrorMessage);
+                MessageBox.Show(m_Result.ErrorMessage);
             }
+        }
+        protected override void OnShown(EventArgs e)
+        {
+            base.OnShown(e);
+            m_AppSettings = new AppSettings();
+            if (File.Exists(@"C:\Users\Yarden\Desktop\appSettings.xml"))
+            {
+                m_AppSettings = AppSettings.loadFromFile();
+                if(m_AppSettings.RememberUser)
+                {
+                    loginAndInit();
+                }
+            }
+        }
+
+        protected override void OnFormClosing(FormClosingEventArgs e)
+        {
+            base.OnFormClosing(e);
+            m_AppSettings.RememberUser = checkBoxRememberMe.Checked;
+            if(m_AppSettings.RememberUser)
+            {
+                m_AppSettings.LastAccessToken = m_Result.AccessToken;
+            }
+            else
+            {
+                m_AppSettings.LastAccessToken = null;
+            }
+            m_AppSettings.saveToFile();
         }
 
         private void buttonLogin_Click(object sender, EventArgs e)
@@ -77,6 +116,8 @@ namespace FacebookApp
         }
         private void controlsVisibility(bool visibilty)
         {
+            buttonLogin.Visible = !visibilty;
+            checkBoxRememberMe.Visible = !visibilty;
             listBoxFriendsList.Visible = visibilty;
             profilePic.Visible = visibilty;
             buttonFetchFriends.Visible = visibilty;
@@ -139,9 +180,16 @@ namespace FacebookApp
             {
                 User selectedUser = (User)listBoxFriendsList.Items[listBoxFriendsList.SelectedIndex];
                 string photoURL= getMostLikedPhoto(selectedUser);
-                pictureBoxMostLikedPhoto.Visible = true;
-                labelPhotoLikes.Visible = true;
-                pictureBoxMostLikedPhoto.LoadAsync(photoURL);
+                try
+                {
+                    pictureBoxMostLikedPhoto.LoadAsync(photoURL);
+                    pictureBoxMostLikedPhoto.Visible = true;
+                    labelPhotoLikes.Visible = true;
+                }
+                catch(Exception)
+                {
+                    MessageBox.Show("Because of Facebook permissions not able to get photo");
+                }
             }
             else
             {

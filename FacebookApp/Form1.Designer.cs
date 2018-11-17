@@ -41,6 +41,7 @@
             this.buttonGetMostLikedPhoto = new System.Windows.Forms.Button();
             this.pictureBoxMostLikedPhoto = new System.Windows.Forms.PictureBox();
             this.labelPhotoLikes = new System.Windows.Forms.Label();
+            this.checkBoxRememberMe = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.profilePic)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMostLikedPhoto)).BeginInit();
             this.SuspendLayout();
@@ -194,6 +195,18 @@
             this.labelPhotoLikes.Text = "Number of Likes: ";
             this.labelPhotoLikes.Visible = false;
             // 
+            // checkBoxRememberMe
+            // 
+            this.checkBoxRememberMe.AutoSize = true;
+            this.checkBoxRememberMe.BackColor = System.Drawing.SystemColors.Highlight;
+            this.checkBoxRememberMe.ForeColor = System.Drawing.SystemColors.Control;
+            this.checkBoxRememberMe.Location = new System.Drawing.Point(276, 78);
+            this.checkBoxRememberMe.Name = "checkBoxRememberMe";
+            this.checkBoxRememberMe.Size = new System.Drawing.Size(184, 29);
+            this.checkBoxRememberMe.TabIndex = 15;
+            this.checkBoxRememberMe.Text = "Remember Me";
+            this.checkBoxRememberMe.UseVisualStyleBackColor = false;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
@@ -202,6 +215,7 @@
             this.BackgroundImage = global::FacebookApp.Properties.Resources.facebookBackground;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1942, 857);
+            this.Controls.Add(this.checkBoxRememberMe);
             this.Controls.Add(this.labelPhotoLikes);
             this.Controls.Add(this.pictureBoxMostLikedPhoto);
             this.Controls.Add(this.buttonGetMostLikedPhoto);
@@ -241,6 +255,7 @@
         private System.Windows.Forms.Button buttonGetMostLikedPhoto;
         private System.Windows.Forms.PictureBox pictureBoxMostLikedPhoto;
         private System.Windows.Forms.Label labelPhotoLikes;
+        private System.Windows.Forms.CheckBox checkBoxRememberMe;
         //This is a test.
     }
 }
