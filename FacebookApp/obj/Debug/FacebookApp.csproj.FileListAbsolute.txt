@@ -10,3 +10,13 @@ C:\Users\Itay\Documents\DesignPatterns\DesignPatternsFaceBookApp\FacebookApp\obj
 C:\Users\Itay\Documents\DesignPatterns\DesignPatternsFaceBookApp\FacebookApp\obj\Debug\FacebookApp.csproj.CopyComplete
 C:\Users\Itay\Documents\DesignPatterns\DesignPatternsFaceBookApp\FacebookApp\obj\Debug\FacebookApp.exe
 C:\Users\Itay\Documents\DesignPatterns\DesignPatternsFaceBookApp\FacebookApp\obj\Debug\FacebookApp.pdb
+C:\Users\Yarden\source\repos\DesignPatternsFaceBookApp\FacebookApp\bin\Debug\FacebookApp.exe
+C:\Users\Yarden\source\repos\DesignPatternsFaceBookApp\FacebookApp\bin\Debug\FacebookApp.pdb
+C:\Users\Yarden\source\repos\DesignPatternsFaceBookApp\FacebookApp\obj\Debug\FacebookApp.csprojAssemblyReference.cache
+C:\Users\Yarden\source\repos\DesignPatternsFaceBookApp\FacebookApp\obj\Debug\FacebookApp.Form1.resources
+C:\Users\Yarden\source\repos\DesignPatternsFaceBookApp\FacebookApp\obj\Debug\FacebookApp.Properties.Resources.resources
+C:\Users\Yarden\source\repos\DesignPatternsFaceBookApp\FacebookApp\obj\Debug\FacebookApp.csproj.GenerateResource.cache
+C:\Users\Yarden\source\repos\DesignPatternsFaceBookApp\FacebookApp\obj\Debug\FacebookApp.csproj.CoreCompileInputs.cache
+C:\Users\Yarden\source\repos\DesignPatternsFaceBookApp\FacebookApp\obj\Debug\FacebookApp.csproj.CopyComplete
+C:\Users\Yarden\source\repos\DesignPatternsFaceBookApp\FacebookApp\obj\Debug\FacebookApp.exe
+C:\Users\Yarden\source\repos\DesignPatternsFaceBookApp\FacebookApp\obj\Debug\FacebookApp.pdb
