@@ -43,6 +43,9 @@ namespace FacebookApp
                 m_LoggedInUser = m_Result.LoggedInUser;
                 profilePic.LoadAsync(m_LoggedInUser.PictureLargeURL);
                 controlsVisibility(true);
+                tabControl1.Controls.Add(this.tabPage2);
+                tabPage1.Text = "Profile";
+                m_FriendsList = new FacebookUtils();
             }
             else
             {
@@ -75,6 +78,7 @@ namespace FacebookApp
             {
                 m_AppSettings.LastAccessToken = null;
             }
+            tabControl1.Controls.Remove(tabPage2);
             m_AppSettings.saveToFile();
         }
 
@@ -99,7 +103,6 @@ namespace FacebookApp
         {
             listBoxFriendsList.Items.Clear();
             listBoxFriendsList.DisplayMember = "Name";
-            m_FriendsList = new FacebookUtils();
             foreach (User friend in m_LoggedInUser.Friends)
             {
                 listBoxFriendsList.Items.Add(friend);
@@ -216,6 +219,17 @@ namespace FacebookApp
             }
             labelPhotoLikes.Text = String.Format("Number of Likes: {0}", maxLikes);
             return photoURL;
+        }
+        private void monthCalendar1_DateChanged(object sender, DateRangeEventArgs e)
+        {
+           
+
+        }
+
+        private void buttonShowFriendsBirthday_Click(object sender, EventArgs e)
+        {
+            DateTime date = monthCalendar1.SelectionRange.Start;
+            List<UserNode> friendsBirthdayList = m_FriendsList.FindFriendsByBirthday(date);
         }
     }
 }

@@ -28,14 +28,21 @@ namespace FacebookApp
         public List<UserNode> FindFriendsByBirthday(DateTime date)
         {
             List<UserNode> dateToFriends = new List<UserNode>();
+            string dateAsString = dateToString(date);
             foreach(UserNode user in m_UserList)
             {
-                if(user.Birthday.Equals(date))
+                string userBirthday = dateToString(user.Birthday);
+                if (userBirthday.Equals(dateAsString))
                 {
                     dateToFriends.Add(user);
                 }
             }
             return dateToFriends;
+        }
+        private string dateToString(DateTime i_date)
+        {
+            string date = i_date.Day.ToString() + "/" + i_date.Month.ToString();
+            return date;
         }
     }
 }
