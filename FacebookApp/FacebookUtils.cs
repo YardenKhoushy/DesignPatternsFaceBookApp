@@ -25,5 +25,17 @@ namespace FacebookApp
         {
             m_UserList.Sort((user1, user2) => Comparer<DateTime?>.Default.Compare(user1.Birthday, user2.Birthday));
         }
+        public List<UserNode> FindFriendsByBirthday(DateTime date)
+        {
+            List<UserNode> dateToFriends = new List<UserNode>();
+            foreach(UserNode user in m_UserList)
+            {
+                if(user.Birthday.Equals(date))
+                {
+                    dateToFriends.Add(user);
+                }
+            }
+            return dateToFriends;
+        }
     }
 }
