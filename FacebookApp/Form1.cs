@@ -92,6 +92,10 @@ namespace FacebookApp
             FacebookService.Logout(null);
             controlsVisibility(false);
             listBoxFriendsList.Items.Clear();
+            m_AppSettings.RememberUser = false;
+            this.tabPage1.Text = "Login";
+            this.checkBoxRememberMe.Checked = false;
+            this.tabControl1.Controls.Remove(tabPage2);
         }
 
         private void fetchFriends_Click(object sender, EventArgs e)
@@ -181,10 +185,10 @@ namespace FacebookApp
         {
             if (listBoxFriendsList.SelectedItem != null)
             {
-                User selectedUser = (User)listBoxFriendsList.Items[listBoxFriendsList.SelectedIndex];
-                string photoURL= getMostLikedPhoto(selectedUser);
                 try
                 {
+                    User selectedUser = (User)listBoxFriendsList.Items[listBoxFriendsList.SelectedIndex];
+                    string photoURL = getMostLikedPhoto(selectedUser);
                     pictureBoxMostLikedPhoto.LoadAsync(photoURL);
                     pictureBoxMostLikedPhoto.Visible = true;
                     labelPhotoLikes.Visible = true;
@@ -230,6 +234,86 @@ namespace FacebookApp
         {
             DateTime date = monthCalendar1.SelectionRange.Start;
             List<UserNode> friendsBirthdayList = m_FriendsList.FindFriendsByBirthday(date);
+            updateListBoxWithFriendsBirthdays(friendsBirthdayList);
+        }
+
+        private void updateListBoxWithFriendsBirthdays(List<UserNode> i_BirthdayList)
+        {
+            if(i_BirthdayList.Count != 0)
+            {
+                foreach(UserNode user in i_BirthdayList)
+                {
+                    listBoxShowFriendsBirthday.Items.Add(user);
+                }
+            }
+            else
+            {
+                MessageBox.Show("No friends with birthdays on selected date");
+            }
+        }
+
+        private void postButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Status postedStatusTry = m_LoggedInUser.PostStatus(postTextBox.Text);
+            }
+            catch (Exception)
+            {
+                postTextBox.Clear();
+                MessageBox.Show("Cannot post status due to limited Facebook permisions");
+            }
+
+            Status postedStatus = m_LoggedInUser.PostStatus(postTextBox.Text);
+            if (postedStatus.Id == null)
+            {
+                MessageBox.Show("Please write a post");
+            }
+            else
+            {
+                MessageBox.Show("Status Posted! ID: " + postedStatus.Id);
+            }
+            postTextBox.Clear();
+        }
+
+        private void buttonFetchEvents_Click(object sender, EventArgs e)
+        {
+            pictureBoxEvent.Visible = true;
+            fetchEvents();
+
+        }
+
+        private void fetchEvents()
+        {
+            listBoxFetchEvents.Items.Clear();
+            listBoxFetchEvents.DisplayMember = "Name";
+            foreach (Event fbEvent in m_LoggedInUser.Events)
+            {
+                listBoxFetchEvents.Items.Add(fbEvent);
+            }
+
+            if (m_LoggedInUser.Events.Count == 0)
+            {
+                MessageBox.Show("No Events to retrieve :(");
+            }
+        }
+
+        private void listBoxFetchEvents_selectedIndexChanged(object sender, EventArgs e)
+        {
+            if (listBoxFetchEvents.SelectedItems.Count == 1)
+            {
+                Event selectedEvent = listBoxFetchEvents.SelectedItem as Event;
+                pictureBoxEvent.LoadAsync(selectedEvent.PictureNormalURL);
+            }
+        }
+        private void pictureBoxEvent_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void postTextBox_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

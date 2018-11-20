@@ -31,16 +31,16 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.listBoxFriendsList = new System.Windows.Forms.ListBox();
+            this.buttonFetchFriends = new System.Windows.Forms.Button();
+            this.listBoxFetchPosts = new System.Windows.Forms.ListBox();
             this.checkBoxRememberMe = new System.Windows.Forms.CheckBox();
             this.labelPhotoLikes = new System.Windows.Forms.Label();
             this.pictureBoxMostLikedPhoto = new System.Windows.Forms.PictureBox();
             this.buttonGetMostLikedPhoto = new System.Windows.Forms.Button();
             this.labelGetPhoto = new System.Windows.Forms.Label();
-            this.listBoxFetchPosts = new System.Windows.Forms.ListBox();
             this.buttonFetchPosts = new System.Windows.Forms.Button();
             this.buttonBirthdaySort = new System.Windows.Forms.Button();
-            this.listBoxFriendsList = new System.Windows.Forms.ListBox();
-            this.buttonFetchFriends = new System.Windows.Forms.Button();
             this.buttonLogout = new System.Windows.Forms.Button();
             this.profilePic = new System.Windows.Forms.PictureBox();
             this.buttonLogin = new System.Windows.Forms.Button();
@@ -49,11 +49,17 @@
             this.buttonShowFriendsBirthday = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.monthCalendar1 = new System.Windows.Forms.MonthCalendar();
+            this.postTextBox = new System.Windows.Forms.TextBox();
+            this.pictureBoxEvent = new System.Windows.Forms.PictureBox();
+            this.listBoxFetchEvents = new System.Windows.Forms.ListBox();
+            this.buttonFetchEvents = new System.Windows.Forms.Button();
+            this.postButton = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMostLikedPhoto)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.profilePic)).BeginInit();
             this.tabPage2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxEvent)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -72,16 +78,16 @@
             this.tabPage1.BackColor = System.Drawing.Color.LightGray;
             this.tabPage1.BackgroundImage = global::FacebookApp.Properties.Resources.facebookBackground;
             this.tabPage1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.tabPage1.Controls.Add(this.listBoxFriendsList);
+            this.tabPage1.Controls.Add(this.buttonFetchFriends);
+            this.tabPage1.Controls.Add(this.listBoxFetchPosts);
             this.tabPage1.Controls.Add(this.checkBoxRememberMe);
             this.tabPage1.Controls.Add(this.labelPhotoLikes);
             this.tabPage1.Controls.Add(this.pictureBoxMostLikedPhoto);
             this.tabPage1.Controls.Add(this.buttonGetMostLikedPhoto);
             this.tabPage1.Controls.Add(this.labelGetPhoto);
-            this.tabPage1.Controls.Add(this.listBoxFetchPosts);
             this.tabPage1.Controls.Add(this.buttonFetchPosts);
             this.tabPage1.Controls.Add(this.buttonBirthdaySort);
-            this.tabPage1.Controls.Add(this.listBoxFriendsList);
-            this.tabPage1.Controls.Add(this.buttonFetchFriends);
             this.tabPage1.Controls.Add(this.buttonLogout);
             this.tabPage1.Controls.Add(this.profilePic);
             this.tabPage1.Controls.Add(this.buttonLogin);
@@ -91,6 +97,44 @@
             this.tabPage1.Size = new System.Drawing.Size(1976, 806);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Login";
+            // 
+            // listBoxFriendsList
+            // 
+            this.listBoxFriendsList.BackColor = System.Drawing.SystemColors.Highlight;
+            this.listBoxFriendsList.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.listBoxFriendsList.FormattingEnabled = true;
+            this.listBoxFriendsList.ItemHeight = 25;
+            this.listBoxFriendsList.Location = new System.Drawing.Point(545, 238);
+            this.listBoxFriendsList.Name = "listBoxFriendsList";
+            this.listBoxFriendsList.Size = new System.Drawing.Size(259, 304);
+            this.listBoxFriendsList.TabIndex = 31;
+            this.listBoxFriendsList.Visible = false;
+            // 
+            // buttonFetchFriends
+            // 
+            this.buttonFetchFriends.BackColor = System.Drawing.SystemColors.Highlight;
+            this.buttonFetchFriends.ForeColor = System.Drawing.SystemColors.Control;
+            this.buttonFetchFriends.Location = new System.Drawing.Point(545, 145);
+            this.buttonFetchFriends.Name = "buttonFetchFriends";
+            this.buttonFetchFriends.Size = new System.Drawing.Size(259, 63);
+            this.buttonFetchFriends.TabIndex = 30;
+            this.buttonFetchFriends.Text = "Fetch Friends";
+            this.buttonFetchFriends.UseVisualStyleBackColor = false;
+            this.buttonFetchFriends.Visible = false;
+            this.buttonFetchFriends.Click += new System.EventHandler(this.fetchFriends_Click);
+            // 
+            // listBoxFetchPosts
+            // 
+            this.listBoxFetchPosts.BackColor = System.Drawing.SystemColors.Highlight;
+            this.listBoxFetchPosts.ForeColor = System.Drawing.SystemColors.Control;
+            this.listBoxFetchPosts.FormattingEnabled = true;
+            this.listBoxFetchPosts.HorizontalScrollbar = true;
+            this.listBoxFetchPosts.ItemHeight = 25;
+            this.listBoxFetchPosts.Location = new System.Drawing.Point(940, 238);
+            this.listBoxFetchPosts.Name = "listBoxFetchPosts";
+            this.listBoxFetchPosts.Size = new System.Drawing.Size(259, 304);
+            this.listBoxFetchPosts.TabIndex = 29;
+            this.listBoxFetchPosts.Visible = false;
             // 
             // checkBoxRememberMe
             // 
@@ -152,19 +196,6 @@
     "ist.\r\nThen press \'Get Photo\'";
             this.labelGetPhoto.Visible = false;
             // 
-            // listBoxFetchPosts
-            // 
-            this.listBoxFetchPosts.BackColor = System.Drawing.SystemColors.Highlight;
-            this.listBoxFetchPosts.ForeColor = System.Drawing.SystemColors.Control;
-            this.listBoxFetchPosts.FormattingEnabled = true;
-            this.listBoxFetchPosts.HorizontalScrollbar = true;
-            this.listBoxFetchPosts.ItemHeight = 25;
-            this.listBoxFetchPosts.Location = new System.Drawing.Point(940, 248);
-            this.listBoxFetchPosts.Name = "listBoxFetchPosts";
-            this.listBoxFetchPosts.Size = new System.Drawing.Size(259, 304);
-            this.listBoxFetchPosts.TabIndex = 23;
-            this.listBoxFetchPosts.Visible = false;
-            // 
             // buttonFetchPosts
             // 
             this.buttonFetchPosts.BackColor = System.Drawing.SystemColors.Highlight;
@@ -191,31 +222,6 @@
             this.buttonBirthdaySort.UseVisualStyleBackColor = false;
             this.buttonBirthdaySort.Visible = false;
             this.buttonBirthdaySort.Click += new System.EventHandler(this.buttonBirthdaySort_Click);
-            // 
-            // listBoxFriendsList
-            // 
-            this.listBoxFriendsList.BackColor = System.Drawing.SystemColors.Highlight;
-            this.listBoxFriendsList.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.listBoxFriendsList.FormattingEnabled = true;
-            this.listBoxFriendsList.ItemHeight = 25;
-            this.listBoxFriendsList.Location = new System.Drawing.Point(545, 247);
-            this.listBoxFriendsList.Name = "listBoxFriendsList";
-            this.listBoxFriendsList.Size = new System.Drawing.Size(259, 304);
-            this.listBoxFriendsList.TabIndex = 20;
-            this.listBoxFriendsList.Visible = false;
-            // 
-            // buttonFetchFriends
-            // 
-            this.buttonFetchFriends.BackColor = System.Drawing.SystemColors.Highlight;
-            this.buttonFetchFriends.ForeColor = System.Drawing.SystemColors.Control;
-            this.buttonFetchFriends.Location = new System.Drawing.Point(545, 145);
-            this.buttonFetchFriends.Name = "buttonFetchFriends";
-            this.buttonFetchFriends.Size = new System.Drawing.Size(259, 63);
-            this.buttonFetchFriends.TabIndex = 19;
-            this.buttonFetchFriends.Text = "Fetch Friends";
-            this.buttonFetchFriends.UseVisualStyleBackColor = false;
-            this.buttonFetchFriends.Visible = false;
-            this.buttonFetchFriends.Click += new System.EventHandler(this.fetchFriends_Click);
             // 
             // buttonLogout
             // 
@@ -256,16 +262,23 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.BackgroundImage = global::FacebookApp.Properties.Resources.facebookBackground;
+            this.tabPage2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.tabPage2.Controls.Add(this.listBoxShowFriendsBirthday);
             this.tabPage2.Controls.Add(this.buttonShowFriendsBirthday);
             this.tabPage2.Controls.Add(this.label1);
             this.tabPage2.Controls.Add(this.monthCalendar1);
+            this.tabPage2.Controls.Add(this.postTextBox);
+            this.tabPage2.Controls.Add(this.pictureBoxEvent);
+            this.tabPage2.Controls.Add(this.listBoxFetchEvents);
+            this.tabPage2.Controls.Add(this.buttonFetchEvents);
+            this.tabPage2.Controls.Add(this.postButton);
             this.tabPage2.Location = new System.Drawing.Point(8, 39);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage2.Size = new System.Drawing.Size(1976, 806);
             this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "tabPage2";
+            this.tabPage2.Text = "Features";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // listBoxShowFriendsBirthday
@@ -274,9 +287,9 @@
             this.listBoxShowFriendsBirthday.ForeColor = System.Drawing.SystemColors.WindowText;
             this.listBoxShowFriendsBirthday.FormattingEnabled = true;
             this.listBoxShowFriendsBirthday.ItemHeight = 25;
-            this.listBoxShowFriendsBirthday.Location = new System.Drawing.Point(523, 241);
+            this.listBoxShowFriendsBirthday.Location = new System.Drawing.Point(523, 210);
             this.listBoxShowFriendsBirthday.Name = "listBoxShowFriendsBirthday";
-            this.listBoxShowFriendsBirthday.Size = new System.Drawing.Size(218, 204);
+            this.listBoxShowFriendsBirthday.Size = new System.Drawing.Size(271, 354);
             this.listBoxShowFriendsBirthday.TabIndex = 22;
             // 
             // buttonShowFriendsBirthday
@@ -285,7 +298,7 @@
             this.buttonShowFriendsBirthday.ForeColor = System.Drawing.SystemColors.Control;
             this.buttonShowFriendsBirthday.Location = new System.Drawing.Point(523, 108);
             this.buttonShowFriendsBirthday.Name = "buttonShowFriendsBirthday";
-            this.buttonShowFriendsBirthday.Size = new System.Drawing.Size(275, 63);
+            this.buttonShowFriendsBirthday.Size = new System.Drawing.Size(271, 69);
             this.buttonShowFriendsBirthday.TabIndex = 21;
             this.buttonShowFriendsBirthday.Text = "Show Friends Birthday";
             this.buttonShowFriendsBirthday.UseVisualStyleBackColor = false;
@@ -294,9 +307,10 @@
             // label1
             // 
             this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.875F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(34, 41);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(420, 25);
+            this.label1.Size = new System.Drawing.Size(767, 42);
             this.label1.TabIndex = 1;
             this.label1.Text = "Choose a Date and see who\'s birthday it is";
             // 
@@ -306,6 +320,64 @@
             this.monthCalendar1.Name = "monthCalendar1";
             this.monthCalendar1.TabIndex = 0;
             this.monthCalendar1.DateChanged += new System.Windows.Forms.DateRangeEventHandler(this.monthCalendar1_DateChanged);
+            // 
+            // postTextBox
+            // 
+            this.postTextBox.BackColor = System.Drawing.SystemColors.Control;
+            this.postTextBox.Location = new System.Drawing.Point(884, 22);
+            this.postTextBox.Multiline = true;
+            this.postTextBox.Name = "postTextBox";
+            this.postTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.postTextBox.Size = new System.Drawing.Size(521, 44);
+            this.postTextBox.TabIndex = 17;
+            this.postTextBox.Text = "What\'s on your mind?";
+            this.postTextBox.TextChanged += new System.EventHandler(this.postTextBox_TextChanged);
+            // 
+            // pictureBoxEvent
+            // 
+            this.pictureBoxEvent.Location = new System.Drawing.Point(949, 563);
+            this.pictureBoxEvent.Name = "pictureBoxEvent";
+            this.pictureBoxEvent.Size = new System.Drawing.Size(132, 131);
+            this.pictureBoxEvent.TabIndex = 21;
+            this.pictureBoxEvent.TabStop = false;
+            this.pictureBoxEvent.Visible = false;
+            this.pictureBoxEvent.Click += new System.EventHandler(this.pictureBoxEvent_Click);
+            // 
+            // listBoxFetchEvents
+            // 
+            this.listBoxFetchEvents.BackColor = System.Drawing.SystemColors.Highlight;
+            this.listBoxFetchEvents.ForeColor = System.Drawing.SystemColors.Control;
+            this.listBoxFetchEvents.FormattingEnabled = true;
+            this.listBoxFetchEvents.ItemHeight = 25;
+            this.listBoxFetchEvents.Location = new System.Drawing.Point(900, 210);
+            this.listBoxFetchEvents.Name = "listBoxFetchEvents";
+            this.listBoxFetchEvents.Size = new System.Drawing.Size(226, 354);
+            this.listBoxFetchEvents.TabIndex = 20;
+            this.listBoxFetchEvents.SelectedIndexChanged += new System.EventHandler(this.listBoxFetchEvents_selectedIndexChanged);
+            // 
+            // buttonFetchEvents
+            // 
+            this.buttonFetchEvents.BackColor = System.Drawing.SystemColors.Highlight;
+            this.buttonFetchEvents.ForeColor = System.Drawing.SystemColors.Control;
+            this.buttonFetchEvents.Location = new System.Drawing.Point(884, 108);
+            this.buttonFetchEvents.Name = "buttonFetchEvents";
+            this.buttonFetchEvents.Size = new System.Drawing.Size(242, 69);
+            this.buttonFetchEvents.TabIndex = 19;
+            this.buttonFetchEvents.Text = "Fetch Events";
+            this.buttonFetchEvents.UseVisualStyleBackColor = false;
+            this.buttonFetchEvents.Click += new System.EventHandler(this.buttonFetchEvents_Click);
+            // 
+            // postButton
+            // 
+            this.postButton.BackColor = System.Drawing.SystemColors.Highlight;
+            this.postButton.ForeColor = System.Drawing.SystemColors.Control;
+            this.postButton.Location = new System.Drawing.Point(1449, 22);
+            this.postButton.Name = "postButton";
+            this.postButton.Size = new System.Drawing.Size(252, 44);
+            this.postButton.TabIndex = 18;
+            this.postButton.Text = "Post";
+            this.postButton.UseVisualStyleBackColor = false;
+            this.postButton.Click += new System.EventHandler(this.postButton_Click);
             // 
             // Form1
             // 
@@ -328,23 +400,20 @@
             ((System.ComponentModel.ISupportInitialize)(this.profilePic)).EndInit();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxEvent)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.CheckBox checkBoxRememberMe;
         private System.Windows.Forms.Label labelPhotoLikes;
         private System.Windows.Forms.PictureBox pictureBoxMostLikedPhoto;
         private System.Windows.Forms.Button buttonGetMostLikedPhoto;
         private System.Windows.Forms.Label labelGetPhoto;
-        private System.Windows.Forms.ListBox listBoxFetchPosts;
         private System.Windows.Forms.Button buttonFetchPosts;
         private System.Windows.Forms.Button buttonBirthdaySort;
-        private System.Windows.Forms.ListBox listBoxFriendsList;
-        private System.Windows.Forms.Button buttonFetchFriends;
         private System.Windows.Forms.Button buttonLogout;
         private System.Windows.Forms.PictureBox profilePic;
         private System.Windows.Forms.Button buttonLogin;
@@ -352,9 +421,18 @@
         private System.Windows.Forms.Button buttonShowFriendsBirthday;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.MonthCalendar monthCalendar1;
+        private System.Windows.Forms.TextBox postTextBox;
+        private System.Windows.Forms.Button postButton;
+        private System.Windows.Forms.Button buttonFetchEvents;
+        private System.Windows.Forms.ListBox listBoxFetchEvents;
 
         #endregion
-        //This is a test.
+
+        private System.Windows.Forms.ListBox listBoxFriendsList;
+        private System.Windows.Forms.Button buttonFetchFriends;
+        private System.Windows.Forms.ListBox listBoxFetchPosts;
+        private System.Windows.Forms.PictureBox pictureBoxEvent;
+        public System.Windows.Forms.TabPage tabPage2;
     }
 }
 
