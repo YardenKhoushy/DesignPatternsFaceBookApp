@@ -16,15 +16,21 @@ namespace FacebookApp
             m_UserList = new List<UserNode>();
         }
 
-        public void AddFriend(UserNode user)
+        public void AddFriend(UserNode i_user)
         {
-            m_UserList.Add(user);
+            m_UserList.Add(i_user);
         }
 
-       public void sortFriendsByDate()
+        public void Clear()
+        {
+            m_UserList.Clear();
+        }
+
+        public void SortFriendsByDate()
         {
             m_UserList.Sort((user1, user2) => Comparer<DateTime?>.Default.Compare(user1.Birthday, user2.Birthday));
         }
+
         public List<UserNode> FindFriendsByBirthday(DateTime date)
         {
             List<UserNode> dateToFriends = new List<UserNode>();
@@ -37,8 +43,10 @@ namespace FacebookApp
                     dateToFriends.Add(user);
                 }
             }
+
             return dateToFriends;
         }
+
         private string dateToString(DateTime i_date)
         {
             string date = i_date.Day.ToString() + "/" + i_date.Month.ToString();

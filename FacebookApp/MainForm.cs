@@ -13,78 +13,52 @@ using FacebookWrapper.ObjectModel;
 
 namespace FacebookApp
 {
-    public partial class Form1 : Form
+    public partial class MainForm : Form
     {
-        public Form1()
+        public MainForm()
         {
             InitializeComponent();
             FacebookWrapper.FacebookService.s_CollectionLimit = 200;
             FacebookWrapper.FacebookService.s_FbApiVersion = 2.8f;
+            m_CurrentSession = new Session();
         }
-        public User m_LoggedInUser;
-        public FacebookUtils m_FriendsList;
-        public AppSettings m_AppSettings;
-        public LoginResult m_Result;
 
+        private User m_LoggedInUser;
+        private FacebookUtils m_FriendsList;
+        private Session m_CurrentSession;
 
-        private void loginAndInit()
-        {
-            //LoginResult result = FacebookService.Login("805313746467364", "public_profile", "user_friends");
-            if (!m_AppSettings.RememberUser)
-            {
-                m_Result = FacebookService.Login("1450160541956417", "public_profile", "user_friends", "user_birthday", "user_photos");
-            }
-            else
-            {
-                m_Result = FacebookService.Connect(m_AppSettings.LastAccessToken);
-            }
-            if (!string.IsNullOrEmpty(m_Result.AccessToken))
-            {
-                m_LoggedInUser = m_Result.LoggedInUser;
-                profilePic.LoadAsync(m_LoggedInUser.PictureLargeURL);
-                controlsVisibility(true);
-                tabControl1.Controls.Add(this.tabPage2);
-                tabPage1.Text = "Profile";
-                m_FriendsList = new FacebookUtils();
-            }
-            else
-            {
-                MessageBox.Show(m_Result.ErrorMessage);
-            }
-        }
         protected override void OnShown(EventArgs e)
         {
             base.OnShown(e);
-            m_AppSettings = new AppSettings();
-            if (File.Exists(@"C:\Users\Yarden\Desktop\appSettings.xml"))
-            {
-                m_AppSettings = AppSettings.loadFromFile();
-                if(m_AppSettings.RememberUser)
-                {
-                    loginAndInit();
-                }
-            }
+            m_CurrentSession.AppOpened();
+            LoginWork();
         }
 
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
             base.OnFormClosing(e);
-            m_AppSettings.RememberUser = checkBoxRememberMe.Checked;
-            if(m_AppSettings.RememberUser)
-            {
-                m_AppSettings.LastAccessToken = m_Result.AccessToken;
-            }
-            else
-            {
-                m_AppSettings.LastAccessToken = null;
-            }
-            tabControl1.Controls.Remove(tabPage2);
-            m_AppSettings.saveToFile();
+            m_CurrentSession.AppSettings.RememberUser = checkBoxRememberMe.Checked;
+            m_CurrentSession.CloseApp();
+            tabControl1.Controls.Remove(TabPage2);
         }
 
         private void buttonLogin_Click(object sender, EventArgs e)
         {
-            loginAndInit();
+            m_CurrentSession.LoginAndInit();
+            LoginWork();
+        }
+
+        private void LoginWork()
+        {
+            if (!string.IsNullOrEmpty(m_CurrentSession.Result.AccessToken))
+            {
+                m_LoggedInUser = m_CurrentSession.Result.LoggedInUser;
+                profilePic.LoadAsync(m_LoggedInUser.PictureLargeURL);
+                controlsVisibility(true);
+                tabControl1.Controls.Add(this.TabPage2);
+                tabPage1.Text = "Profile";
+                m_FriendsList = new FacebookUtils();
+            }
         }
 
         private void buttonLogout_Click(object sender, EventArgs e)
@@ -92,10 +66,10 @@ namespace FacebookApp
             FacebookService.Logout(null);
             controlsVisibility(false);
             listBoxFriendsList.Items.Clear();
-            m_AppSettings.RememberUser = false;
+            m_CurrentSession.AppSettings.RememberUser = false;
             this.tabPage1.Text = "Login";
             this.checkBoxRememberMe.Checked = false;
-            this.tabControl1.Controls.Remove(tabPage2);
+            this.tabControl1.Controls.Remove(TabPage2);
         }
 
         private void fetchFriends_Click(object sender, EventArgs e)
@@ -103,10 +77,12 @@ namespace FacebookApp
             getFriends();
             buttonBirthdaySort.Enabled = true;
         }
+
         private void getFriends()
         {
             listBoxFriendsList.Items.Clear();
             listBoxFriendsList.DisplayMember = "Name";
+            m_FriendsList.Clear();
             foreach (User friend in m_LoggedInUser.Friends)
             {
                 listBoxFriendsList.Items.Add(friend);
@@ -114,6 +90,7 @@ namespace FacebookApp
                 UserNode user = new UserNode(friend);
                 m_FriendsList.AddFriend(user);
             }
+
             buttonBirthdaySort.Enabled = true;
             if (m_LoggedInUser.Friends.Count == 0)
             {
@@ -121,6 +98,7 @@ namespace FacebookApp
                 buttonBirthdaySort.Enabled = false;
             }
         }
+
         private void controlsVisibility(bool visibilty)
         {
             buttonLogin.Visible = !visibilty;
@@ -138,7 +116,7 @@ namespace FacebookApp
 
         private void buttonBirthdaySort_Click(object sender, EventArgs e)
         {
-            m_FriendsList.sortFriendsByDate();
+            m_FriendsList.SortFriendsByDate();
             GetFriendsListAfterSort();
         }
 
@@ -202,13 +180,12 @@ namespace FacebookApp
             {
                 MessageBox.Show("Please choose a friend from your friends list");
             }    
-            
         }
 
         private string getMostLikedPhoto(User i_SelectedUser)
         {
             int maxLikes = 0;
-            string photoURL = "";
+            string photoURL = String.Empty;
             foreach(Album album in i_SelectedUser.Albums)
             {
                 foreach(Photo photo in album.Photos)
@@ -221,13 +198,9 @@ namespace FacebookApp
                     }
                 }
             }
-            labelPhotoLikes.Text = String.Format("Number of Likes: {0}", maxLikes);
-            return photoURL;
-        }
-        private void monthCalendar1_DateChanged(object sender, DateRangeEventArgs e)
-        {
-           
 
+            labelPhotoLikes.Text = string.Format("Number of Likes: {0}", maxLikes);
+            return photoURL;
         }
 
         private void buttonShowFriendsBirthday_Click(object sender, EventArgs e)
@@ -273,6 +246,7 @@ namespace FacebookApp
             {
                 MessageBox.Show("Status Posted! ID: " + postedStatus.Id);
             }
+
             postTextBox.Clear();
         }
 
@@ -280,7 +254,6 @@ namespace FacebookApp
         {
             pictureBoxEvent.Visible = true;
             fetchEvents();
-
         }
 
         private void fetchEvents()
@@ -305,15 +278,6 @@ namespace FacebookApp
                 Event selectedEvent = listBoxFetchEvents.SelectedItem as Event;
                 pictureBoxEvent.LoadAsync(selectedEvent.PictureNormalURL);
             }
-        }
-        private void pictureBoxEvent_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void postTextBox_TextChanged(object sender, EventArgs e)
-        {
-
         }
     }
 }

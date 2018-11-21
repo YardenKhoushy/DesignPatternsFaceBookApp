@@ -1,6 +1,6 @@
 ﻿namespace FacebookApp
 {
-    partial class Form1
+    public partial class MainForm
     {
         /// <summary>
         /// Required designer variable.
@@ -17,6 +17,7 @@
             {
                 components.Dispose();
             }
+
             base.Dispose(disposing);
         }
 
@@ -28,7 +29,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.listBoxFriendsList = new System.Windows.Forms.ListBox();
@@ -44,7 +45,7 @@
             this.buttonLogout = new System.Windows.Forms.Button();
             this.profilePic = new System.Windows.Forms.PictureBox();
             this.buttonLogin = new System.Windows.Forms.Button();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.TabPage2 = new System.Windows.Forms.TabPage();
             this.listBoxShowFriendsBirthday = new System.Windows.Forms.ListBox();
             this.buttonShowFriendsBirthday = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
@@ -58,7 +59,7 @@
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMostLikedPhoto)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.profilePic)).BeginInit();
-            this.tabPage2.SuspendLayout();
+            this.TabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxEvent)).BeginInit();
             this.SuspendLayout();
             // 
@@ -262,24 +263,24 @@
             // 
             // tabPage2
             // 
-            this.tabPage2.BackgroundImage = global::FacebookApp.Properties.Resources.facebookBackground;
-            this.tabPage2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.tabPage2.Controls.Add(this.listBoxShowFriendsBirthday);
-            this.tabPage2.Controls.Add(this.buttonShowFriendsBirthday);
-            this.tabPage2.Controls.Add(this.label1);
-            this.tabPage2.Controls.Add(this.monthCalendar1);
-            this.tabPage2.Controls.Add(this.postTextBox);
-            this.tabPage2.Controls.Add(this.pictureBoxEvent);
-            this.tabPage2.Controls.Add(this.listBoxFetchEvents);
-            this.tabPage2.Controls.Add(this.buttonFetchEvents);
-            this.tabPage2.Controls.Add(this.postButton);
-            this.tabPage2.Location = new System.Drawing.Point(8, 39);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(1976, 806);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Features";
-            this.tabPage2.UseVisualStyleBackColor = true;
+            this.TabPage2.BackgroundImage = global::FacebookApp.Properties.Resources.facebookBackground;
+            this.TabPage2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.TabPage2.Controls.Add(this.listBoxShowFriendsBirthday);
+            this.TabPage2.Controls.Add(this.buttonShowFriendsBirthday);
+            this.TabPage2.Controls.Add(this.label1);
+            this.TabPage2.Controls.Add(this.monthCalendar1);
+            this.TabPage2.Controls.Add(this.postTextBox);
+            this.TabPage2.Controls.Add(this.pictureBoxEvent);
+            this.TabPage2.Controls.Add(this.listBoxFetchEvents);
+            this.TabPage2.Controls.Add(this.buttonFetchEvents);
+            this.TabPage2.Controls.Add(this.postButton);
+            this.TabPage2.Location = new System.Drawing.Point(8, 39);
+            this.TabPage2.Name = "tabPage2";
+            this.TabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.TabPage2.Size = new System.Drawing.Size(1976, 806);
+            this.TabPage2.TabIndex = 1;
+            this.TabPage2.Text = "Features";
+            this.TabPage2.UseVisualStyleBackColor = true;
             // 
             // listBoxShowFriendsBirthday
             // 
@@ -319,7 +320,6 @@
             this.monthCalendar1.Location = new System.Drawing.Point(39, 108);
             this.monthCalendar1.Name = "monthCalendar1";
             this.monthCalendar1.TabIndex = 0;
-            this.monthCalendar1.DateChanged += new System.Windows.Forms.DateRangeEventHandler(this.monthCalendar1_DateChanged);
             // 
             // postTextBox
             // 
@@ -331,17 +331,15 @@
             this.postTextBox.Size = new System.Drawing.Size(521, 44);
             this.postTextBox.TabIndex = 17;
             this.postTextBox.Text = "What\'s on your mind?";
-            this.postTextBox.TextChanged += new System.EventHandler(this.postTextBox_TextChanged);
             // 
             // pictureBoxEvent
             // 
-            this.pictureBoxEvent.Location = new System.Drawing.Point(949, 563);
+            this.pictureBoxEvent.Location = new System.Drawing.Point(1195, 210);
             this.pictureBoxEvent.Name = "pictureBoxEvent";
             this.pictureBoxEvent.Size = new System.Drawing.Size(132, 131);
             this.pictureBoxEvent.TabIndex = 21;
             this.pictureBoxEvent.TabStop = false;
             this.pictureBoxEvent.Visible = false;
-            this.pictureBoxEvent.Click += new System.EventHandler(this.pictureBoxEvent_Click);
             // 
             // listBoxFetchEvents
             // 
@@ -398,8 +396,8 @@
             this.tabPage1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMostLikedPhoto)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.profilePic)).EndInit();
-            this.tabPage2.ResumeLayout(false);
-            this.tabPage2.PerformLayout();
+            this.TabPage2.ResumeLayout(false);
+            this.TabPage2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxEvent)).EndInit();
             this.ResumeLayout(false);
 
@@ -432,7 +430,6 @@
         private System.Windows.Forms.Button buttonFetchFriends;
         private System.Windows.Forms.ListBox listBoxFetchPosts;
         private System.Windows.Forms.PictureBox pictureBoxEvent;
-        public System.Windows.Forms.TabPage tabPage2;
+        public System.Windows.Forms.TabPage TabPage2;
     }
 }
-
